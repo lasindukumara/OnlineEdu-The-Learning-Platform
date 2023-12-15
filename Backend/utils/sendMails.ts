@@ -18,6 +18,8 @@ const sendMail = async (options: EmailOptions): Promise<void> => {
             user: process.env.SMTP_MAIL,
             pass: process.env.SMTP_PASSWORD,
         },
+        tls : { rejectUnauthorized: false },
+
     });
 
     const { email, subject, template, data } = options;
@@ -30,7 +32,7 @@ const sendMail = async (options: EmailOptions): Promise<void> => {
 
     const mailOptions = {
         from: process.env.SMTP_MAIL,
-        to: email,
+        to:email,
         subject,
         html: html as string, // Type assertion to ensure 'html' is of type string
     };
