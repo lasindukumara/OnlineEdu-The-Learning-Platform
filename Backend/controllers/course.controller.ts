@@ -44,7 +44,6 @@ export const editCourse = CatchAsyncError(
       const data = req.body;
       const thumbnail = data.thumbnail;
       // const courseId1 = req.params.id; // <-- courseId declared once as a parameter
-
       //   // Validate input data
       //   if (!courseId1 || !data.thumbnail) {
       //     throw new ErrorHandler("Invalid input data", 400);
