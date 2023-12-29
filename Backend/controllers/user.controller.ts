@@ -47,12 +47,11 @@ export const registrationUser = CatchAsyncError(
       const activationToken = createActivationToken(user);
       const activationCode = activationToken.activationCode;
 
-      const data = { user: { user: user.name }, activationCode };
+      const data = { user: { user: user.name , email }, activationCode };
       const html = await ejs.renderFile(
         path.join(__dirname, "../mails/Activation-mail.ejs"),
         data
       );
-
       try {
         await sendMail({
           email: user.email,
@@ -234,7 +233,7 @@ export const updateAccessToken = CatchAsyncError(
       res.cookie("access_token", accessToken, accessTokenOptions);
       res.cookie("refresh_token", refreshToken, refreshTokenOptions);
 
-      await redis.set(user._id,JSON.stringify(user),"EX",604800)
+      await redis.set(user._id, JSON.stringify(user), "EX", 604800);
 
       res.status(200).json({
         status: "success",
